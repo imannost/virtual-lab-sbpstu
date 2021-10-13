@@ -1,1 +1,3 @@
 # virtual-lab-sbpstu
+
+## Авторы:
