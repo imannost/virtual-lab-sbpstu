@@ -9,4 +9,5 @@ public class MinerApplication {
     public static void main(String[] args) {
         SpringApplication.run(MinerApplication.class, args);
     }
+    
 }
