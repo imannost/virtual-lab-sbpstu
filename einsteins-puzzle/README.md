@@ -9,4 +9,6 @@ cd ide-client
 npm install
 ```
 2.2 Запуск клиента
-```npm start ```
+```
+npm start
+```
