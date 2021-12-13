@@ -14,3 +14,17 @@ npm install
 ```
 npm start
 ```
+
+**Сервер**
+
+4. Установка зависимостей
+```
+cd ..
+cd ide-server
+pip3 install -r requirements.txt
+```
+5. Запуск сервера
+```
+. venv/bin/activate
+flask run
+```
