@@ -5,11 +5,12 @@ text_code_1 = '''#pragma comment(lib, "bdd.lib")
 using namespace std;
 '''
 
-text_code_2 = '''ofstream out;
+text_code_2 = '''
+ofstream out;
 
 void fun(char* varset, int size); // функция, используемая для вывода решений
 
-void main(void)
+int main(void)
 {
 \t// инициализация
 \tbdd_init(10000, 1000);
@@ -55,7 +56,7 @@ text_code_3 = '''// вывод результатов
 // В собственных заданиях следует использовать эти функции
 // или придумать собственные.
 
-tchar var[N_VAR];
+char var[N_VAR];
 
 void print(void)
 {
