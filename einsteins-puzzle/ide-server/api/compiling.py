@@ -21,17 +21,29 @@ def compile_code(data):
     output = save_file(file_name, data)
     if output:
         path = os.path.abspath(file_name)
-        logging.info("FILE PATH = " + path)
+        logging.info("PROGRAM FILE PATH = " + path)
         # compile code
         try:
-            logging.info("RUNNING PROGRAM...")
-            os.system("g++ -I/usr/local/include" + path + "-o myfile -L/usr/local/lib -lbdd")
-            os.system("./myfile")
+            logging.info("COMPILING PROGRAM...")
+            os.system("g++ -I/usr/local/include program.cpp -o myfile -L/usr/local/lib -lbdd")
         except:
             logging.info("ERROR COMPILING CODE")
-        f = open('out.txt', 'r')
-        result = f.read()
-        f.close()
+        try:
+            logging.info("RUNNING PROGRAM...")
+            path = os.path.abspath("myfile")
+            logging.info("PROJECT FILE PATH = " + path)
+            os.system("./myfile")
+        except:
+            logging.info("ERROR RUNNING CODE")
+        try:
+            logging.info("READING OUTPUT...")
+            path = os.path.abspath("out.txt")
+            logging.info("OUTPUT FILE PATH = " + path)
+            f = open(path, 'r')
+            result = f.read()
+            f.close()
+        except:
+            logging.info("ERROR READING OUTPUT")
         logging.info("OUTPUT:")
         logging.info(result)
         return result

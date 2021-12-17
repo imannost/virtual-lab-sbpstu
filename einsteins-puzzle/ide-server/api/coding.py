@@ -19,11 +19,15 @@ def run_program(data):
     logging.info(code)
 
     from . import compiling
-    output = compiling.compile_code(code)
+    try:
+        output = compiling.compile_code(code)
+        logging.info("DELETING...")
+        delete_file("program.cpp")
+        delete_file("myfile")
+        delete_file("out.txt")
 
-    logging.info("DELETING...")
-    delete_file("program.cpp")
-    delete_file("myfile")
-    delete_file("out.txt")
+        return output
+    except:
+        return 0
 
-    return output
+
