@@ -20,10 +20,6 @@ def run_program(data):
 
     from . import compiling
     output = compiling.compile_code(code)
-    if output == "":
-        logging.info("SUCCESS: output: " + output)
-    else:
-        logging.info("ERROR: output")
 
     logging.info("DELETING...")
     delete_file("program.cpp")
