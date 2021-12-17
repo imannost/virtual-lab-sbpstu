@@ -5,9 +5,9 @@ import os
 def delete_file(name):
     try:
         os.remove(name)
-        logging.info("FILE DELETED")
+        logging.info(name + ": FILE DELETED")
     except:
-        logging.info("ERROR DELETING FILE")
+        logging.info(name + ": ERROR DELETING FILE")
 
 
 def run_program(data):
@@ -20,12 +20,14 @@ def run_program(data):
 
     from . import compiling
     output = compiling.compile_code(code)
-    # if (output == ""):
-    #     logging.info("SUCCESS: output: " + output)
-    #     else:
-    #         logging.info("ERROR: output: " + err)
+    if output == "":
+        logging.info("SUCCESS: output: " + output)
+    else:
+        logging.info("ERROR: output")
 
     logging.info("DELETING...")
     delete_file("program.cpp")
+    delete_file("myfile")
+    delete_file("out.txt")
 
     return output

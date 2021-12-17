@@ -24,11 +24,16 @@ def compile_code(data):
         logging.info("FILE PATH = " + path)
         # compile code
         try:
-            os.system("gcc " + path)
-            logging.info("OUTPUT:" + output)
-            return output
+            logging.info("RUNNING PROGRAM...")
+            os.system("g++ -I/usr/local/include" + path + "-o myfile -L/usr/local/lib -lbdd")
+            os.system("./myfile")
         except:
             logging.info("ERROR COMPILING CODE")
-            return 0
+        f = open('out.txt', 'r')
+        result = f.read()
+        f.close()
+        logging.info("OUTPUT:")
+        logging.info(result)
+        return result
     else:
         return logging.info("DON'T HAVE FILE")
