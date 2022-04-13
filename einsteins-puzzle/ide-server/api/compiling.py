@@ -25,7 +25,7 @@ def compile_code(data):
         # compile code
         try:
             logging.info("COMPILING PROGRAM...")
-            os.system("g++ -I/usr/local/include program.cpp -o myfile -L/usr/local/lib -lbdd")
+            os.system("g++ -I/usr/local/include program.cpp -o myfile -L/usr/local/lib -lbdd 2> out.log")
         except:
             logging.info("ERROR COMPILING CODE")
         try:
@@ -44,6 +44,10 @@ def compile_code(data):
             f.close()
         except:
             logging.info("ERROR READING OUTPUT")
+            path = os.path.abspath("out.log")
+            f = open(path, 'r')
+            result = f.read()
+            f.close()
         logging.info("OUTPUT:")
         logging.info(result)
         return result
