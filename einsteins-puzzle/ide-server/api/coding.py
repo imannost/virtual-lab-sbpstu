@@ -25,9 +25,7 @@ def run_program(data):
         delete_file("program.cpp")
         delete_file("myfile")
         delete_file("out.txt")
-
+        delete_file("out.log")
         return output
     except:
         return 0
-
-
