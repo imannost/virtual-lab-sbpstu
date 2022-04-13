@@ -19,26 +19,20 @@ export default class Ide extends Component {
         code_6: code.code_6,
         code_7: code.code_7,
         code_8: code.code_8,
-        lang: 'cpp'
     }
+
 
     onSubmitHandler = (e) => {
         e.preventDefault()
         alert("submit code")
-        axios.post(`${secret.url}code/submit`,this.state)
+        axios.post(`${secret.url}`,this.state) //!!!!!!!!!!!!!!!!!!
             .then(res=>{
                 console.log(res.data)
                 const data = res.data
-                if(data.err){
-                    // Error in user code
-                    this.setState({
-                        result: data.error
-                    })
-                }else{
-                    this.setState({
-                        result: data.output
-                    })
-                }
+                this.setState({
+                    result: data.result
+                })
+
             })
             .catch(err=>{
                 console.log(err)
@@ -46,12 +40,12 @@ export default class Ide extends Component {
     }
 
 
-    onCodeChangeHandler = (newCode, e) => {
-        console.log(e)
-        this.setState({
-            code: newCode
-        })
-    }
+//    onCodeChangeHandler = (newCode, e) => {
+//        console.log(e)
+//        this.setState({
+//            code: newCode
+//        })
+//    }
 
 
     render() {
@@ -66,18 +60,16 @@ export default class Ide extends Component {
             },
             snippetSuggestions: "inline"
           };
-        console.log(this.state)
         return (
             <>
                 <div className="container">
                     <div className="row">
                         <div className="col-12 mt-5">
-
                             <p className="lead d-block my-0">Код работы</p>
-                            <h>1.</h>
+                            1.
                             <br />
                             <textarea disabled={true} id="code" rows="5" value={this.state.text_code_1}/>
-                            <br /><h>2.</h>
+                            <br />2.
                             <MonacoEditor
                                 width="70vw"
                                 height="100"
@@ -87,9 +79,9 @@ export default class Ide extends Component {
                                 options={options}
                                 onChange={this.state.code_1.onCodeChangeHandler}
                             />
-                            <h>1.</h><br />
+                            1.<br />
                             <textarea disabled={true} id="code" rows="33" value={this.state.text_code_2}/>
-                            <br /><h>3.</h>
+                            <br />3.
                             <MonacoEditor
                                 width="70vw"
                                 height="40"
@@ -99,7 +91,7 @@ export default class Ide extends Component {
                                 options={options}
                                 onChange={this.state.code_2.onCodeChangeHandler}
                             />
-                            <br /><h>4.</h>
+                            <br />4.
                             <MonacoEditor
                                 width="70vw"
                                 height="300"
@@ -109,7 +101,7 @@ export default class Ide extends Component {
                                 options={options}
                                 onChange={this.state.code_3.onCodeChangeHandler}
                             />
-                            <br /><h>5.</h>
+                            <br />5.
                             <MonacoEditor
                                 width="70vw"
                                 height="200"
@@ -119,7 +111,7 @@ export default class Ide extends Component {
                                 options={options}
                                 onChange={this.state.code_4.onCodeChangeHandler}
                             />
-                            <br /><h>6.</h>
+                            <br />6.
                             <MonacoEditor
                                 width="70vw"
                                 height="200"
@@ -129,7 +121,7 @@ export default class Ide extends Component {
                                 options={options}
                                 onChange={this.state.code_5.onCodeChangeHandler}
                             />
-                            <br /><h>7.</h>
+                            <br />7.
                             <MonacoEditor
                                 width="70vw"
                                 height="250"
@@ -139,7 +131,7 @@ export default class Ide extends Component {
                                 options={options}
                                 onChange={this.state.code_6.onCodeChangeHandler}
                             />
-                            <br /><h>8.</h>
+                            <br />8.
                             <MonacoEditor
                                 width="70vw"
                                 height="500"
@@ -149,7 +141,7 @@ export default class Ide extends Component {
                                 options={options}
                                 onChange={this.state.code_7.onCodeChangeHandler}
                             />
-                            <br /><h>9.</h>
+                            <br />9.
                             <MonacoEditor
                                 width="70vw"
                                 height="500"
@@ -159,7 +151,7 @@ export default class Ide extends Component {
                                 options={options}
                                 onChange={this.state.code_8.onCodeChangeHandler}
                             />
-                            <h>1.</h><br />
+                            1.<br />
                             <textarea disabled={true} id="code" rows="66" value={this.state.text_code_3}/>
                         </div>
                     </div>
