@@ -14,11 +14,13 @@ RUN chmod +x buddy-2.4/configure
 RUN ./buddy-2.4/configure
 RUN make
 RUN make install
-RUN LD_LIBRARY_PATH=/usr/local/lib
-RUN export LD_LIBRARY_PATH
-# RUN cd ..
-# RUN chmod -R 755 /usr/local/lib
-# RUN chmod -R 755 /usr/local/include
+RUN chmod -R 755 /usr/local/lib
+RUN chmod -R 755 /usr/local/include
 
+RUN cd ..
+ENV LD_LIBRARY_PATH "/usr/local/lib"
+
+WORKDIR /ide-server
+RUN export LD_LIBRARY_PATH
 
 CMD ["python", "-m", "flask", "run", "--host=0.0.0.0"]
