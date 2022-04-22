@@ -1,7 +1,4 @@
-# FROM ubuntu as lib-inst
-
-
-FROM python:3.10.0 as server-run
+FROM python:3.10.4-slim
 WORKDIR /ide-server
 RUN apt-get update -y
 RUN apt-get install -y python3-pip
