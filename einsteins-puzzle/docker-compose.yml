@@ -1,0 +1,12 @@
+version: "3"
+services:
+  server:
+    build: ./ide-server/
+    ports:
+      - "5000:5000"
+    container_name: server
+  client:
+    build: ./ide-client
+    ports:
+      - "3000:3000"
+    container_name: client
