@@ -1,12 +1,14 @@
 version: "3"
 services:
   server:
-    build: ./ide-server/
+    image: imannost/ide-server:latest
+    restart: always
     ports:
-      - "5555:5000"
-    container_name: server
+      - "20287:5000"
+    container_name: ide-server
   client:
-    build: ./ide-client/
+    image: imannost/ide-client:latest
+    restart: always
     ports:
-      - "3000:3000"
-    container_name: client
+      - "20288:3000"
+    container_name: ide-client
