@@ -24,10 +24,8 @@ export default class Ide extends Component {
 
     onSubmitHandler = (e) => {
         e.preventDefault()
-        console.log(this.state)
         axios.post(`${secret.url}`, this.state)
             .then(res => {
-                console.log(res.data)
                 const data = res.data
                 this.setState({
                     result: data.result
