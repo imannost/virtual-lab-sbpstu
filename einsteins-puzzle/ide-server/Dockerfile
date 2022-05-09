@@ -1,18 +1,18 @@
 FROM python:3.10.4-slim
 WORKDIR /ide-server
-RUN apt-get update -y
-RUN apt-get install -y python3-pip
+RUN apt-get update -y && \
+    apt-get install -y python3-pip
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 
 COPY . .
 
-RUN chmod +x buddy-2.4/configure
-RUN ./buddy-2.4/configure
-RUN make
-RUN make install
-RUN chmod -R 755 /usr/local/lib
-RUN chmod -R 755 /usr/local/include
+RUN chmod +x buddy-2.4/configure && \
+    ./buddy-2.4/configure && \
+    make && \ 
+    make install && \
+    chmod -R 755 /usr/local/lib && \
+    chmod -R 755 /usr/local/include
 
 RUN cd ..
 ENV LD_LIBRARY_PATH "/usr/local/lib"
