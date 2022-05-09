@@ -1,7 +1,8 @@
 FROM node:16.14.2-slim
 WORKDIR /ide-client
 
-COPY package.json package-lock.json ./
+COPY package.json .
+COPY package-lock.json .
 
 RUN npm install
 
