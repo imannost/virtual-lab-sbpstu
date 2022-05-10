@@ -1,13 +1,17 @@
 #code{
-    width: 70vw;
+    width: 100%;
     font-family: Consolas, "Courier New", monospace;
     font-size: 14px;
     resize: none;
 }
 
 #result{
-    min-width: 70vw;
-    max-width: 70vw;
+    width: 100%;
     min-height: 20vh;
     margin-bottom: 100px;
+}
+
+.container {
+    resize: vertical; 
+    overflow: auto;
 }

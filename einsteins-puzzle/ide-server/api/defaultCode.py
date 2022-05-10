@@ -2,11 +2,9 @@ text_code_1 = '''#pragma comment(lib, "bdd.lib")
 #include "bdd.h"
 #include <fstream>
 
-using namespace std;
-'''
+using namespace std;'''
 
-text_code_2 = '''
-ofstream out;
+text_code_2 = '''ofstream out;
 
 void fun(char* varset, int size); // функция, используемая для вывода решений
 
@@ -38,8 +36,7 @@ int main(void)
 \t\t}
 \t\tI += LOG_N*M;
 \t}
-\t// -<---
-'''
+\t// -<---'''
 
 text_code_3 = '''// вывод результатов
 \tout.open("out.txt");
@@ -106,5 +103,4 @@ void build(char* varset, unsigned n, unsigned I)
 void fun(char* varset, int size)
 {
 \tbuild(varset, size, 0);
-}
-'''
+}'''

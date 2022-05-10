@@ -15,7 +15,7 @@ def save_file(name, data):
         return 0
 
 
-def compile_code(data):
+def compile_code(data, numberLines):
     logging.info("SAVING FILES")
     file_name = "program.cpp"
     output = save_file(file_name, data)
@@ -44,10 +44,9 @@ def compile_code(data):
             f.close()
         except:
             logging.info("ERROR READING OUTPUT")
-            path = os.path.abspath("out.log")
-            f = open(path, 'r')
-            result = f.read()
-            f.close()
+            from . import parsingLog
+            result = parsingLog.parse_log("out.log", numberLines)
+            
         logging.info("OUTPUT:")
         logging.info(result)
         return result

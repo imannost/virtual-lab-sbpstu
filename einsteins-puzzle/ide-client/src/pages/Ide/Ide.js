@@ -4,6 +4,17 @@ import axios from 'axios'
 import secret from '../../secrets/secret'
 import MonacoEditor from 'react-monaco-editor';
 import { code } from './defaultCode'
+import { usePromiseTracker } from "react-promise-tracker";
+import { trackPromise } from 'react-promise-tracker';
+import Loader from 'react-loader-spinner';
+
+const LoadingIndicator = props => {
+    const { promiseInProgress } = usePromiseTracker()
+    return (
+        promiseInProgress &&
+        <Loader type="ThreeDots" color="#2BAD60" height="38" />
+    );
+}
 
 export default class Ide extends Component {
     state = {
@@ -24,64 +35,56 @@ export default class Ide extends Component {
 
     onSubmitHandler = (e) => {
         e.preventDefault()
-        axios.post(`${secret.url}`, this.state)
-            .then(res => {
-                const data = res.data
-                this.setState({
-                    result: data.result
+        trackPromise(
+            axios.post(`${secret.url}`, this.state)
+                .then(res => {
+                    const data = res.data
+                    this.setState({
+                        result: data.result
+                    })
                 })
-
-            })
-            .catch(err => {
-                console.log(err)
-            })
+                .catch(err => {
+                    console.log(err)
+                }))
     }
 
 
     onCode1ChangeHandler = (newCode, e) => {
-        console.log(e)
         this.setState({
             code_1: newCode
         })
     }
     onCode2ChangeHandler = (newCode, e) => {
-        console.log(e)
         this.setState({
             code_2: newCode
         })
     }
     onCode3ChangeHandler = (newCode, e) => {
-        console.log(e)
         this.setState({
             code_3: newCode
         })
     }
     onCode4ChangeHandler = (newCode, e) => {
-        console.log(e)
         this.setState({
             code_4: newCode
         })
     }
     onCode5ChangeHandler = (newCode, e) => {
-        console.log(e)
         this.setState({
             code_5: newCode
         })
     }
     onCode6ChangeHandler = (newCode, e) => {
-        console.log(e)
         this.setState({
             code_6: newCode
         })
-    }    
+    }
     onCode7ChangeHandler = (newCode, e) => {
-        console.log(e)
         this.setState({
             code_7: newCode
         })
     }
     onCode8ChangeHandler = (newCode, e) => {
-        console.log(e)
         this.setState({
             code_8: newCode
         })
@@ -107,14 +110,13 @@ export default class Ide extends Component {
             <>
                 <div className="container">
                     <div className="row">
-                        <div className="col-12 mt-5">
+                        <div className="col mt-5">
                             <p className="lead d-block my-0">Код работы</p>
                             1.
                             <br />
                             <textarea disabled={true} id="code" rows="5" value={this.state.text_code_1} />
                             <br />2.
                             <MonacoEditor
-                                width="70vw"
                                 height="100"
                                 language="cpp"
                                 theme="vs-dark"
@@ -127,7 +129,6 @@ export default class Ide extends Component {
                             <textarea disabled={true} id="code" rows="33" value={this.state.text_code_2} />
                             <br />3.
                             <MonacoEditor
-                                width="70vw"
                                 height="40"
                                 language="cpp"
                                 theme="vs-dark"
@@ -138,7 +139,6 @@ export default class Ide extends Component {
                             />
                             <br />4.
                             <MonacoEditor
-                                width="70vw"
                                 height="300"
                                 language="cpp"
                                 theme="vs-dark"
@@ -149,7 +149,6 @@ export default class Ide extends Component {
                             />
                             <br />5.
                             <MonacoEditor
-                                width="70vw"
                                 height="200"
                                 language="cpp"
                                 theme="vs-dark"
@@ -160,7 +159,6 @@ export default class Ide extends Component {
                             />
                             <br />6.
                             <MonacoEditor
-                                width="70vw"
                                 height="200"
                                 language="cpp"
                                 theme="vs-dark"
@@ -171,7 +169,6 @@ export default class Ide extends Component {
                             />
                             <br />7.
                             <MonacoEditor
-                                width="70vw"
                                 height="250"
                                 language="cpp"
                                 theme="vs-dark"
@@ -182,7 +179,6 @@ export default class Ide extends Component {
                             />
                             <br />8.
                             <MonacoEditor
-                                width="70vw"
                                 height="500"
                                 language="cpp"
                                 theme="vs-dark"
@@ -193,7 +189,6 @@ export default class Ide extends Component {
                             />
                             <br />9.
                             <MonacoEditor
-                                width="70vw"
                                 height="500"
                                 language="cpp"
                                 theme="vs-dark"
@@ -206,11 +201,15 @@ export default class Ide extends Component {
                             <textarea disabled={true} id="code" rows="66" value={this.state.text_code_3} />
                         </div>
                     </div>
-                    <button className="btn btn-success" onClick={this.onSubmitHandler}>Run</button>
                     <div className="row">
-                        <div className="col-12 my-2">
-                            <textarea id="result" value={this.state.result} disabled={true}>
-                            </textarea>
+                        <div className="col-md-auto">
+                            <button className="btn btn-success" onClick={this.onSubmitHandler}>Run</button>
+                        </div>
+                        <div className="col"> <LoadingIndicator /> </div>
+                    </div>
+                    <div className="row">
+                        <div className="col my-2">
+                            <textarea id="result" value={this.state.result} disabled={true}></textarea>
                         </div>
                     </div>
                 </div>
