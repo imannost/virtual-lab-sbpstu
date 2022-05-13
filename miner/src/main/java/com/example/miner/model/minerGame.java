@@ -1,1 +1,0 @@
-package com.example.miner.model;import net.sf.javabdd.BDD;public class minerGame {}
