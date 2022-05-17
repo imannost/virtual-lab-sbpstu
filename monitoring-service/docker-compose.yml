@@ -1,0 +1,39 @@
+version: "3.9"
+
+services:
+  monitoring-service:
+    image: imannost/monitoring-service
+    container_name: monitoring-service
+    ports:
+      - "20285:8090"
+    depends_on:
+      - postgres
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/vir-lab
+  postgres:
+    image: postgres
+    container_name: postgres
+    restart: always
+    ports:
+      - "20280:5432"
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: vir-lab
+    volumes:
+      - bd_data:/var/lib/postgresql/data
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin4_container
+    restart: always
+    ports:
+      - "20281:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: me@example.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+
+volumes:
+  bd_data:
+  pgadmin-data:

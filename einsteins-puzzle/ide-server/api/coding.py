@@ -1,3 +1,4 @@
+from cmath import log
 import logging
 import os
 
@@ -17,12 +18,18 @@ def run_program(data):
     from . import parsingLog
     numberLines = parsingLog.count_lines(data)
 
-    logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.INFO)
+    logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.INFO, filename="session-token-"+data['token']+".log")
+    logging.info("-------------------------------")
+    logging.info(data['token'])
+    logging.info("-------------------------------")
     logging.info(code)
+
+    from . import sendingMetrics
+    sendingMetrics.send_time_metrics(data['time_start'], data['time_end'], data['token'])
 
     from . import compiling
     try:
-        output = compiling.compile_code(code, numberLines)
+        output = compiling.compile_code(code, numberLines, data['token'])
         logging.info("DELETING...")
         delete_file("program.cpp")
         delete_file("myfile")
@@ -30,4 +37,4 @@ def run_program(data):
         delete_file("out.log")
         return output
     except:
-        return 0
+        return "Unknown error"

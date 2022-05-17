@@ -30,11 +30,16 @@ export default class Ide extends Component {
         code_6: code.code_6,
         code_7: code.code_7,
         code_8: code.code_8,
+        time_start: new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString(),
+        time_end: "",
+        token: ""
     }
 
 
     onSubmitHandler = (e) => {
         e.preventDefault()
+        this.state.time_end = new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString()
+        console.log(this.state)
         trackPromise(
             axios.post(`${secret.url}`, this.state)
                 .then(res => {
@@ -50,44 +55,39 @@ export default class Ide extends Component {
 
 
     onCode1ChangeHandler = (newCode, e) => {
-        this.setState({
-            code_1: newCode
-        })
+        this.setState({code_1: newCode})
     }
+    
     onCode2ChangeHandler = (newCode, e) => {
-        this.setState({
-            code_2: newCode
-        })
+        this.setState({code_2: newCode})
     }
+    
     onCode3ChangeHandler = (newCode, e) => {
-        this.setState({
-            code_3: newCode
-        })
+        this.setState({code_3: newCode})
     }
+    
     onCode4ChangeHandler = (newCode, e) => {
-        this.setState({
-            code_4: newCode
-        })
+        this.setState({code_4: newCode})
     }
+    
     onCode5ChangeHandler = (newCode, e) => {
-        this.setState({
-            code_5: newCode
-        })
+        this.setState({code_5: newCode})
     }
+    
     onCode6ChangeHandler = (newCode, e) => {
-        this.setState({
-            code_6: newCode
-        })
+        this.setState({code_6: newCode})
     }
+    
     onCode7ChangeHandler = (newCode, e) => {
-        this.setState({
-            code_7: newCode
-        })
+        this.setState({code_7: newCode})
     }
+    
     onCode8ChangeHandler = (newCode, e) => {
-        this.setState({
-            code_8: newCode
-        })
+        this.setState({code_8: newCode})
+    }
+
+    onTokenChangeHandler = (NewToken, e) => {
+        this.setState({token: NewToken.target.value})
     }
 
     editorDidMount = (e) => {
@@ -205,10 +205,17 @@ export default class Ide extends Component {
                         <div className="col-md-auto">
                             <button className="btn btn-success" onClick={this.onSubmitHandler}>Run</button>
                         </div>
-                        <div className="col"> <LoadingIndicator /> </div>
+                        <div className="col"><LoadingIndicator /></div>
                     </div>
                     <div className="row">
                         <div className="col my-2">
+                            <textarea type="text" 
+                                      id="token" 
+                                      rows="1" 
+                                      value={this.state.token} 
+                                      onChange={this.onTokenChangeHandler}
+                                      placeholder="Введите персональный токен"> 
+                            </textarea >
                             <textarea id="result" value={this.state.result} disabled={true}></textarea>
                         </div>
                     </div>

@@ -15,3 +15,8 @@
     resize: vertical; 
     overflow: auto;
 }
+
+#token {
+    resize: none; 
+    width: 100%;
+}

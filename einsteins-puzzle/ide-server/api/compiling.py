@@ -15,8 +15,9 @@ def save_file(name, data):
         return 0
 
 
-def compile_code(data, numberLines):
+def compile_code(data, numberLines, token):
     logging.info("SAVING FILES")
+    attept = ""
     file_name = "program.cpp"
     output = save_file(file_name, data)
     if output:
@@ -42,13 +43,19 @@ def compile_code(data, numberLines):
             f = open(path, 'r')
             result = f.read()
             f.close()
+            attept = "vic"
         except:
             logging.info("ERROR READING OUTPUT")
+            attept = "def"
             from . import parsingLog
             result = parsingLog.parse_log("out.log", numberLines)
             
         logging.info("OUTPUT:")
         logging.info(result)
+
+        from . import sendingMetrics
+        sendingMetrics.send_time_metrics(attept, token)
+
         return result
     else:
         return logging.info("DON'T HAVE FILE")
