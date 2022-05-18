@@ -5,7 +5,7 @@ nameGame = "Course Work Math Logic"
 
 
 def send_time_metrics(time_start, time_end, token):
-    url = ""
+    url = "http://195.209.230.3:20285/time"
     data = {"nameGame": nameGame,
             "timeStart": time_start,
             "timeFinish": time_end,
@@ -17,7 +17,7 @@ def send_time_metrics(time_start, time_end, token):
 
 
 def send_attept_metrics(attepmt, token):
-    url = ""
+    url = "http://195.209.230.3:20285/gameVictory"
     data = {"nameGame": nameGame,
             "metic": attepmt,
             "token": token}
