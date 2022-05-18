@@ -39,7 +39,6 @@ export default class Ide extends Component {
     onSubmitHandler = (e) => {
         e.preventDefault()
         this.state.time_end = new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString()
-        console.log(this.state)
         trackPromise(
             axios.post(`${secret.url}`, this.state)
                 .then(res => {
