@@ -1,6 +1,13 @@
 version: "3.9"
 
 services:
+  tokenizator:
+    image: imannost/tokenizator:latest
+    container_name: tokenizator
+    ports:
+      - "20283:8020"
+    depends_on:
+      - postgres
   monitoring-service:
     image: imannost/monitoring-service
     container_name: monitoring-service
