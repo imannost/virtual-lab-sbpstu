@@ -3,23 +3,32 @@ import logging
 
 nameGame = "Course Work Math Logic"
 
-
 def send_time_metrics(time_start, time_end, token):
-    url = "http://195.209.230.3:20285/time"
+    url = "http://monitoring-service:8090/time"
     data = {"nameGame": nameGame,
             "timeStart": time_start,
             "timeFinish": time_end,
             "timeInGame": "",
-            "email": token}
-    requests.post(url, json=data)
-    logging.info("Metric about timing was send")
+            "token": token}
+        
+    try:
+        requests.post(url, json=data)
+        logging.info("Metric about timing was send")
+    except:
+        logging.info("ERROR: Metric about timing ")
+        pass
 
 
 
 def send_attept_metrics(attepmt, token):
-    url = "http://195.209.230.3:20285/gameVictory"
+    url =  "http://monitoring-service:8090/gameVictory"
     data = {"nameGame": nameGame,
-            "metic": attepmt,
+            "metric": attepmt,
             "token": token}
-    requests.post(url, json=data)
-    logging.info("Metric about attept was send")
+
+    try: 
+        requests.post(url, json=data)
+        logging.info("Metric about attept was send")
+    except: 
+        logging.info("ERROR: Metric about attept")
+        pass

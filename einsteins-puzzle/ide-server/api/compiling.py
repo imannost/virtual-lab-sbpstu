@@ -54,7 +54,7 @@ def compile_code(data, numberLines, token):
         logging.info(result)
         try:
             from . import sendingMetrics
-            sendingMetrics.send_time_metrics(attept, token)
+            sendingMetrics.send_attept_metrics(attept, token)
         except:
             pass
         return result

@@ -18,17 +18,18 @@ def run_program(data):
     from . import parsingLog
     numberLines = parsingLog.count_lines(data)
 
-    logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.INFO, filename="session-token-"+data['token']+".log")
+    logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.INFO, filename="sessions.log")
     logging.info("--------------------------------------------------------------------")
     logging.info(data['token'])
     logging.info("--------------------------------------------------------------------")
     logging.info(code)
+    
     try:
         from . import sendingMetrics
         sendingMetrics.send_time_metrics(data['time_start'], data['time_end'], data['token'])
     except:
         pass
-    
+
     from . import compiling
     output = "Unknown error"
     try:
