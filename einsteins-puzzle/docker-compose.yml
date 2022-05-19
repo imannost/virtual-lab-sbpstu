@@ -1,14 +1,16 @@
-version: "3"
+version: "3.9"
 services:
-  server:
-    image: imannost/ide-server:latest
+  ide-server:
+    image: imannost/ide-server:v_net
     restart: always
     ports:
       - "20287:5000"
+    network_mode: "services-net"
     container_name: ide-server
-  client:
-    image: imannost/ide-client:latest
+  ide-client:
+    image: imannost/ide-client:v_196
     restart: always
     ports:
       - "20288:3000"
+    network_mode: "services-net"
     container_name: ide-client

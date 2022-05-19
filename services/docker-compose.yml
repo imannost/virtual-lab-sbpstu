@@ -2,15 +2,15 @@ version: "3.9"
 
 services:
   tokenizator:
-    image: imannost/tokenizator:latest
+    image: imannost/tokenizator:v_net_out
     container_name: tokenizator
+    network_mode: "services-net"
     ports:
       - "20283:8020"
-    depends_on:
-      - postgres
   monitoring-service:
-    image: imannost/monitoring-service
+    image: imannost/monitoring-service:v_net_out
     container_name: monitoring-service
+    network_mode: "services-net"
     ports:
       - "20285:8090"
     depends_on:
@@ -21,6 +21,7 @@ services:
     image: postgres
     container_name: postgres
     restart: always
+    network_mode: "services-net"
     ports:
       - "20280:5432"
     environment:
@@ -33,6 +34,7 @@ services:
     image: dpage/pgadmin4
     container_name: pgadmin4_container
     restart: always
+    network_mode: "services-net"
     ports:
       - "20281:80"
     environment:
