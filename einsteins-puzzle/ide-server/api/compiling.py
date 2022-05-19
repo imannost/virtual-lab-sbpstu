@@ -52,10 +52,11 @@ def compile_code(data, numberLines, token):
             
         logging.info("OUTPUT:")
         logging.info(result)
-
-        from . import sendingMetrics
-        sendingMetrics.send_time_metrics(attept, token)
-
+        try:
+            from . import sendingMetrics
+            sendingMetrics.send_time_metrics(attept, token)
+        except:
+            pass
         return result
     else:
         return logging.info("DON'T HAVE FILE")
