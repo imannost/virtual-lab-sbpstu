@@ -19,15 +19,18 @@ def run_program(data):
     numberLines = parsingLog.count_lines(data)
 
     logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.INFO, filename="session-token-"+data['token']+".log")
-    logging.info("-------------------------------")
+    logging.info("--------------------------------------------------------------------")
     logging.info(data['token'])
-    logging.info("-------------------------------")
+    logging.info("--------------------------------------------------------------------")
     logging.info(code)
-
-    from . import sendingMetrics
-    sendingMetrics.send_time_metrics(data['time_start'], data['time_end'], data['token'])
-
+    try:
+        from . import sendingMetrics
+        sendingMetrics.send_time_metrics(data['time_start'], data['time_end'], data['token'])
+    except:
+        pass
+    
     from . import compiling
+    output = "Unknown error"
     try:
         output = compiling.compile_code(code, numberLines, data['token'])
         logging.info("DELETING...")
