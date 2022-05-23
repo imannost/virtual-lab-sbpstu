@@ -1,6 +1,12 @@
 version: "3.9"
 
 services:
+  client-services:
+    image: imannost/client-services:v_net
+    container_name: client-services
+    network_mode: "services-net"
+    ports:
+      - "20284:8080"
   tokenizator:
     image: imannost/tokenizator:v_net_out
     container_name: tokenizator
